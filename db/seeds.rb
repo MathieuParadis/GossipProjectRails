@@ -44,3 +44,14 @@ end
   end
 
 end
+
+loop do
+  sender = User.find_by(id: rand(1..User.all.length))
+  recipient = User.find_by(id: rand(1..User.all.length))
+
+  if sender != recipient
+    message = PrivateMessage.create!(content: Faker::Lorem.paragraph, sender: sender, recipient: recipient)
+  end
+  
+  break if PrivateMessage.count == 60
+end
